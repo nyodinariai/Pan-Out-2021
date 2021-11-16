@@ -1,0 +1,309 @@
+------------------------IR PARA SLIDES AULA 1----------------------------------------------------
+
+
+<!-- Criar um database-->
+CREATE DATABASE Ford;
+<!-- Drop um database-->
+DROP DATABASE Ford;
+<!-- Criar um database-->
+CREATE DATABASE Fiat;
+<!-- Usar um database-->
+use Fiat;
+<!-- Criar uma tabela de clientes-->
+CREATE TABLE clientes (
+	COD INT,
+	NOME VARCHAR (30),
+	SOBRENOME VARCHAR (50),
+	CPF INT
+);
+<!--Descrever a table de clientes-->
+describe clientes;
+<!--drop a table de clientes-->
+drop table clientes;
+<!--Criar a table de clientes com outras informações-->
+
+CREATE TABLE CLIENTES
+(
+Codigo INT,
+Nome VARCHAR (60),
+Data_Nascimento DATE,
+Telefone CHAR (8)
+);
+<!--Descrever a table de clientes-->
+describe clientes;
+<!--drop a table de clientes-->
+drop table clientes;
+<!--Criar a tablea funcionarios -->
+
+create table funcionarios (
+    nome varchar(30),
+    idade tinyint,
+    sexo char(1),
+    peso float,
+	altura float,
+    nacionalidade varchar(20) 
+);
+<!--Descrever a table de funcionarios-->
+describe funcionarios;
+<!--Apagar a table de funcionarios, pois esqueci varios dados e vai dar trabalho
+o alter-->
+drop table funcionarios;
+<!--Criar e explicar a table de funcionarios-->
+CREATE table funcionarios (
+nome varchar(30) NOT NULL,
+nascimento date,
+sexo enum ('M','F'),
+peso decimal(5,2),
+altura decimal(3,2),
+nacionalidade varchar(20) DEFAULT 'Brasil');
+<!--Drop a table de funcionarios-->
+drop table funcionarios;
+<!--Drop a table de funcionarios-->
+<!--Criar uma table CAMPO DE CHAVE PRIMÁRIA NÃO SE REPETE
+(MATRÍCULA, CPF E ETC)-->
+
+		CREATE table funcionarios (
+		id int not null auto_increment,
+		nome varchar(30) NOT NULL,
+		nascimento date,
+		sexo enum ('M','F'),
+		peso decimal(5,2),
+		altura decimal(3,2),
+		nacionalidade varchar(20) DEFAULT 'Brasil',
+		primary key (id));
+		
+---salvar em sua pasta como aula1MySqlTabeladeFuncionariosPronta e apagar o script
+------------------------IR PARA SLIDES AULA 2---------------------------------------------------------------------
+CREATE DATABASE escola;
+USE escola;
+ATUALIZAR SCHEMA;
+	CREATE table funcionarios (
+		id int not null auto_increment,
+		nome varchar(30) NOT NULL,
+		nascimento date,
+		sexo enum ('M','F'),
+		peso decimal(5,2),
+		altura decimal(3,2),
+		nacionalidade varchar(20) DEFAULT 'Brasil',
+		primary key (id));
+
+
+
+<!--ATUALIZAR TABLE NO CAMPO DE NAVEGAÇÃO, CLICAR NO ÍCONE DE INFORMAÇÕES-->
+INSERIR DADOS IGUAL ESTÁ NA TABELA, NA MESMA ORDEM
+Insert into funcionarios values ('1','alex tenorio da silva', '2018-02-03','M','68.5','2.50', 'Brasil');
+<!--MOSTRAR O DADO-->
+SELECT * FROM funcionarios;
+<!--explicar que a próxima vai dar erro pq o id repete-->
+Insert into funcionarios values ('1','Gabriela', '1998-02-03','F','58.5','1.60', 'Brasil');
+<!--corrigir o erro adicionando duas pessoas ao mesmo tempo-->
+Insert into funcionarios values 
+		('2','Gabriela', '1998-02-03','F','58.5','1.60', 'Brasil'),     
+		('3','Daniela', '1995-02-03','F','56.5','1.57', 'Brasil');
+<!--MOSTRAR O DADO-->
+SELECT * FROM funcionarios;
+<!--PEDIR PARA INSERIREM MAIS 2 DADOS mudando o id{4 E 5} e a nacionalidade(tarefas)-->
+<!--Esta é minha, 
+Insert into funcionarios values ('4','Julia', '2017-05-09','F','70.9','1.80', 'Brasil'),
+('5','Marcela', '2017-05-07','F','70.1','1.70', 'Praia Grande');-->
+SELECT * FROM funcionarios;
+<!--PROF VIZUALIZAR, QUEM NÃO FIZER TERÁ PROBLEMA COM O PRÓXIMO ID-->
+
+<!--QUANDO TEMOS MAIS DE UMA TABLE, OU QUEREMOS COLOCAR SÓ ALGUNS DADOS, 
+UTILIZAMOS OUTRO COMANDO PARA INSERIR-->
+SE EU COLOCAR 
+Insert into funcionarios values ('Flavia '2017-05-07','F','70.1','1.70', 'Brasil');
+NÃO FUNCIONA (TESTAR), ASSIM, PARA COLOCAR MENOS DADOS, TEM QUE FAZER ASSIM:
+
+!!!!!Error Code: 1136. Column count doesn't match value count at row 1!!!!
+<!--Explicação Vem depois do ex. da linha seguinte-->
+<!--JÁ QUE NÃO FUNCIONA DAQUELE JEITO (LINHA 92)SE COLOCARMOS APENAS ID, NASCIMENTO, 
+ELE NÃO TERÁ NENHUM NOME.........os dados são inseridos mas ele reclama 
+Exemplo:-->
+Insert into funcionarios (id, nascimento, nacionalidade) values 
+('6','2018-02-03','Brasil');
+<!--MOSTRAR OS DADOS-->
+SELECT * FROM funcionarios;
+<!--Observe que no campo abaixo, não vamos colocar id, ele coloca sozinho pois é auto incremento-->
+Insert into funcionarios (id,nascimento, nacionalidade) values (DEFAULT,'2016-02-03','Espanha');
+<!--MOSTRAR OS DADOS-->
+SELECT * FROM funcionarios;
+<!--Funcionamento do default-->
+Insert into funcionarios (id,nascimento, nacionalidade) values (DEFAULT,'2016-02-03',DEFAULT);
+<!--MOSTRAR OS DADOS-->
+SELECT * FROM funcionarios;
+<!--Dados completos-->
+Insert into funcionarios (id, nome, nascimento, sexo, peso, altura, nacionalidade) values 
+(DEFAULT, 'Marcelo','2015-02-03','M','100.57','2.10', DEFAULT);
+<!--Se eu não colocar nada na nacionalidade, ele coloca Braisl-->
+Insert into funcionarios (id, nome, nascimento, sexo, peso, altura) values 
+(DEFAULT, 'Daniela','2014-02-03','F','50.05','1.65');
+
+---salvar em sua pasta como aula1MySqlTabeladeFuncionariosPronta --- substituir---e apagar o script
+
+---IR PARA SLIDES AULA 2 sobre DDL---------------------------------------------------
+
+ LIMPE SEU SCRIPT MAS NÃO APAGUE A TABELA
+ <!--DDL COMANDO RENAME E ALTER-->
+create table clientes (
+codigo_cliente int not null primary key,
+nome varchar (50),
+cidade varchar (10),
+serie char (1)
+);
+<!--Ver-->
+describe clientes;
+<!--Rename DDL-->
+RENAME TABLE clientes TO alunos;
+<!--ADD DDL-->
+ALTER TABLE alunos ADD email VARCHAR(60);
+<!--Ver-->
+describe alunos;
+<!--Colocar a série com mais de uma informação-->2
+Insert into alunos values 
+(1, 'Daniela','São Paulo', 1,'set.dan@gmail.com'),
+(2,'Fred Silva', 'São Paulo', 25, 'fred.silva@gmail.com.br');
+<!--Ver-->
+select * from alunos;
+<!--apagar coluna-->
+alter table alunos
+drop column email;
+<!--ver desc-->
+describe alunos;
+<!--Adicionar depois do nome-->
+ALTER TABLE alunos ADD profissao VARCHAR(60) after nome;
+<!--ver-->
+describe alunos;
+<!--Adicionar depois do nome-->
+ALTER TABLE alunos ADD nascimento date after profissao;
+<!--ver-->
+describe alunos;
+<!--Adicionar no começo-->
+ALTER TABLE alunos ADD apelido varchar(10) first;
+<!--ver-->
+describe alunos;
+<!--apagar coluna-->
+alter table alunos
+drop column apelido;
+<!--ver desc-->
+describe alunos;
+<!--Modificar as variáveis-->
+alter table alunos
+modify column nome varchar(60);
+<!--ver desc----ver se tem o campo profissao-->
+describe alunos;
+<!-- Mudar o nome do campo-->
+alter table alunos
+change column profissao cargo varchar(10);
+<!--Renomear-->
+RENAME TABLE alunos TO estudantes;
+
+---salvar em sua pasta como aula2MySqlTabeladeFuncionariosPronta e apagar o script
+------------------------IR PARA SLIDES AULA 3---------------------------------------------
+create table produtos (
+nome varchar(30) not null unique,
+descricao text,
+quantidade int UNSIGNED,
+preco decimal(4,2),
+data date 
+);
+<!-- atualizar e ver que tem duas tabelas-->
+<!-- Alterar adicionando em várias posições -->
+alter table produtos add column codigo_produto int first;
+describe produtos;
+alter table produtos add primary key(codigo_produto);
+ALTER TABLE produtos ADD parcelas int after preco;
+describe produtos;
+ <!--verificar unique-->
+describe produtos;
+<!--modify-->
+alter table produtos modify column nome char(10);
+describe produtos;
+alter table produtos modify column descricao char(100);
+<!--Drop column-->
+alter table produtos drop column descricao;
+alter table produtos drop column parcelas;
+<!--Drop table-->
+drop table produtos;
+drop table produtos;
+<!--change-->
+alter table produtos change column nome ITEM varchar(10);
+describe produtos;
+alter table produtos change ITEM nome item varchar(10);
+    <!-- tirar o máiusculo-->
+alter table produtos change ITEM item varchar(10);
+    <!--Mudar quantidade para QTD-->
+alter table alunos change column quantidade QTD int UNSIGNED;
+
+----------------------Aula 4 delete, update
+create database aula8;
+use aula8;
+create table matriculados (
+        id_curso int,
+		nome varchar(30),
+		descricao varchar(30),
+		carga char(10),
+		totalaulas int,
+		ano int,		
+		primary key (id_curso));
+		
+<!--Colocar informações -->
+Insert into matriculados values
+ ('1','HTML', 'Curso de HTML5','40','37','2017'),
+ ('2','CSS', 'Curso de CSS3','20','15','2017'),
+ ('3','PHOTOSHOP', 'Curso de Photoshop','10','8','2018'),
+ ('4','JAVASCRIPT', 'Curso de JS','40','20','2018');
+ 
+ <!--atualizar-->
+ UPDATE matriculados
+ SET nome = 'HTML5'
+ where id_curso = '1';
+ 
+select * from matriculados;
+
+<!--Mudar duas informações por vez -->
+ UPDATE matriculados
+ SET nome = 'CSS3', ano = '2018'
+ where id_curso = '2';
+ 
+ 
+ <!-- MUDAR 2017 PARA 2018--, EDIT PEREFERNCES SEGURE SAVE DESATIVAR-->
+  
+ UPDATE matriculados
+ SET  ano = '2018'
+ where ano = '2017';
+ 
+ select * from matriculados;
+ 
+ UPDATE matriculados
+ SET  ano = '2017'
+ where ano = '2018'
+ LIMIT 1;
+ 
+ select * from matriculados;
+ 
+ UPDATE matriculados
+ SET  ano = '2020'
+ where ano < '2019';
+ 
+ 
+ <!--diferença entre deletar linhas e colunas -->
+ 
+ alter table matriculados drop column totalaulas;	
+  
+DELETE FROM matriculados
+WHERE id_curso = '2';
+
+<!--DELETAR VÁRIOS POR VEZ-->
+DELETE FROM matriculados
+WHERE carga = '40';
+
+<!-- Deletar tudo de uma vez só -->
+TRUNCATE table matriculados;
+select * from matriculados;
+
+<Diferenciação //Drop table (apaga inclusive a estrutura) e truncate table (apagar os dados e mantém a estrutura)>
+
+
+
+
