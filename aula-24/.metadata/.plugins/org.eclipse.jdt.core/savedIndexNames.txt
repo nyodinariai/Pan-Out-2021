@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+/home/nathan/Documentos/panacademy/aula-24/.metadata/.plugins/org.eclipse.jdt.core
+2725185214.index
